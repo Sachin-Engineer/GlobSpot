@@ -1,0 +1,8 @@
+# Parcel Cache
+.parcel-cache/
+
+# Build Output
+dist/
+
+# Node Modules
+node_modules/
