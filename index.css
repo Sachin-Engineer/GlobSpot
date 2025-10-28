@@ -71,6 +71,7 @@ main {
 }
 
 .region-box select {
+    cursor: pointer;
     padding: 10px 8px 10px 16px;
     border: none;
     outline: none;
@@ -89,6 +90,7 @@ main {
 }
 
 .country-card {
+    cursor: pointer;
     overflow: hidden;
     border-radius: 8px;
     background-color: white;

@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './components/Header.jsx'
 import CountryCard from './components/CountryCard.jsx'
-import countries from './data.js'
+// import countries from './data.js'
 
 function App() {
     const [query, setQuery] = useState('')
+
+    const [countries, setCountries] = useState([])
+    
+    useEffect(() => {
+        fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region,maps')
+            .then(res => res.json())
+            .then(data => setCountries(data))
+    }, [])
 
     return (
         <>
