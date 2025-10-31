@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function CountryCard({ flag, name, population, region, capital, cca3 }) {
     return (
-        <Link to={`/Country?cca3=${cca3}`} className="country-card">
+        <Link to={`/${name}`} className="country-card">
             <div className="image">
                 <img src={flag} alt="" />
             </div>

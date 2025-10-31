@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../components/Button'
+import { useParams } from 'react-router-dom'
 
 function Country() {
-  const countryCca3 = new URLSearchParams(location.search).get('cca3')
+  const countryName = useParams().Country
+
   const [country, setCountry] = useState([])
   const [borderCountries, setBorderCountries] = useState([])
 
   useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/alpha/${countryCca3}?fields=name,flags,capital,cca3,population,region,subregion,maps,tld,currencies,languages,borders`)
+    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,flags,capital,cca3,population,region,subregion,maps,tld,currencies,languages,borders`)
       .then(res => res.json())
-      .then(data => {
+      .then(([data]) => {
         setCountry(data)
-        
+
         // Fetch border countries data
         if (data.borders && data.borders.length > 0) {
           Promise.all(
@@ -22,13 +24,13 @@ function Country() {
           ).then(borderData => setBorderCountries(borderData))
         }
       })
-  }, [countryCca3])
+  }, [countryName])
 
   return (
     <main>
       <section>
         <div className="btn-container">
-          <button><i className="fa fas fa-arrow-left"></i> Back</button>
+          <button onClick={() => {history.back()}}><i className="fa fas fa-arrow-left"></i> Back</button>
         </div>
 
         <div className="country-details">
@@ -61,11 +63,9 @@ function Country() {
                 {
                   borderCountries.length > 0 ?
                     borderCountries.map(border => (
-                      <Button 
-                        key={border.cca3} 
-                        flag={border.flags.png} 
-                        name={border.name?.common} 
-                        cca3={border.cca3} 
+                      <Button
+                        key={border.cca3}
+                        name={border.name?.common}
                       />
                     ))
                     :

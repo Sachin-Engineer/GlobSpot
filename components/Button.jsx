@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Button({name, cca3}) {
+function Button({name}) {
   return (
-    <button onClick={() => {location.href = `/Country?cca3=${cca3}`}}>{name}</button>
+    <button onClick={() => {location.href = `/${name}`}}>{name}</button>
   )
 }
 

@@ -4,14 +4,20 @@ import CountryCard from '../components/CountryCard'
 
 function Home() {
     const [query, setQuery] = useState('')
-
     const [countries, setCountries] = useState([])
+    const [region, setRegion] = useState('')
 
     useEffect(() => {
-        fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region')
+        if(region === '') {
+            fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region')
             .then(res => res.json())
             .then(data => setCountries(data))
-    }, [])
+        } else {
+            fetch(`https://restcountries.com/v3.1/region/${region}?fields=name,flags,capital,cca3,population,region`)
+            .then(res => res.json())
+            .then(data => setCountries(data))
+        }
+    }, [region])
 
     return (
         <>
@@ -25,7 +31,7 @@ function Home() {
                     </div>
 
                     <div className="region-box">
-                        <select name="region" id="region">
+                        <select onChange={(e) => setRegion(e.target.value)} name="region" id="region">
                             <option value="" hidden>Filter by Region</option>
                             <option value="Africa">Africa</option>
                             <option value="Americas">Americas</option>
