@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function CountryCard({ flag, name, population, region, capital, cca3 }) {
+function CountryCard({ flag, name, population, region, capital }) {
     return (
         <Link to={`/${name}`} className="country-card">
             <div className="image">

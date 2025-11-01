@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import CountryCard from '../components/CountryCard'
+import CountryCardShimmer from '../components/CountryCardShimmer'
 // import countries from './data.js'
 
 function Home() {
     const [query, setQuery] = useState('')
     const [countries, setCountries] = useState([])
     const [region, setRegion] = useState('')
+    const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        if(region === '') {
+        if (region === '') {
             fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region')
-            .then(res => res.json())
-            .then(data => setCountries(data))
+                .then(res => res.json())
+                .then(data => {
+                    setCountries(data)
+                    setLoading(false)
+                })
         } else {
             fetch(`https://restcountries.com/v3.1/region/${region}?fields=name,flags,capital,cca3,population,region`)
-            .then(res => res.json())
-            .then(data => setCountries(data))
+                .then(res => res.json())
+                .then(data => {
+                    setCountries(data)
+                    setLoading(false)
+                })
         }
     }, [region])
 
@@ -44,21 +52,26 @@ function Home() {
 
                 <section className="countries-container">
                     {
-                        countries.filter((country) => {
-                            return country.name.common.toLowerCase().includes(query.toLowerCase())
-                        }).map((country) => {
-                            return (
-                                <CountryCard
-                                    key={country.cca3}
-                                    flag={country.flags.png}
-                                    name={country.name.common}
-                                    population={country.population}
-                                    region={country.region}
-                                    capital={country.capital}
-                                    cca3={country.cca3}
-                                />
-                            )
-                        })
+                        isLoading ? (
+                            Array.from({length: 20}).map((_, i) => {
+                                return <CountryCardShimmer key={i} />
+                            })
+                        ) : (
+                            countries.filter((country) => {
+                                return country.name.common.toLowerCase().includes(query.toLowerCase())
+                            }).map((country) => {
+                                return (
+                                    <CountryCard
+                                        key={country.cca3}
+                                        flag={country.flags.png}
+                                        name={country.name.common}
+                                        population={country.population}
+                                        region={country.region}
+                                        capital={country.capital}
+                                    />
+                                )
+                            })
+                        )
                     }
                 </section>
             </main>

@@ -1,0 +1,56 @@
+.shimmer-card {
+    height: 307.58px;
+    box-shadow: none;
+    cursor: wait;
+}
+
+.shimmer-card:hover {
+    transform: scale(1);
+    box-shadow: none;
+}
+
+.bg-color {
+    background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+    background-size: 200% 100%;
+    animation: shimmerSlide 1.5s infinite ease-in-out;
+}
+
+@keyframes shimmerSlide {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.shimmer-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ctitle {
+    border-radius: 12px;
+    width: 40%;
+    height: 24px;
+}
+
+.text-1 {
+    border-radius: 4px;
+    width: 60%;
+    height: 20px;
+}
+
+.text-2 {
+    border-radius: 4px;
+    width: 45%;
+    height: 20px;
+}
+
+.text-3 {
+    border-radius: 4px;
+    width: 90%;
+    height: 20px;
+}

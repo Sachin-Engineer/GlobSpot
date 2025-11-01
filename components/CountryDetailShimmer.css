@@ -1,0 +1,62 @@
+.img {
+    border-radius: 10px;
+    width: 100%;
+    aspect-ratio: 3/2;
+    background-color: red;
+}
+
+.c-name {
+    width: 30%;
+    height: 44px;
+    border-radius: 15px;
+}
+
+.text-1, .text-2, .text-3, .text-4, .text-5, .text-6, .text-7, .text-8 {
+    border-radius: 4px;
+    width: 90%;
+    height: 20px;
+}
+
+.text-2 {
+    width: 80%;
+}
+.text-3 {
+    width: 60%;
+}
+.text-4 {
+    width: 95%;
+}
+.text-5 {
+    width: 60%;
+}
+.text-6 {
+    width: 90%;
+}
+.text-7 {
+    width: 90%;
+}
+.text-8 {
+    width: 70%;
+}
+
+.b-country {
+    border-radius: 10px;
+    width: 90%;
+    height: 40px;
+}
+
+.detail-bg-color {
+    background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+    background-size: 200% 100%;
+    animation: shimmerSlide 1.5s infinite ease-in-out;
+}
+
+@keyframes shimmerSlide {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
