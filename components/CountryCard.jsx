@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function CountryCard({ flag, name, population, region, capital }) {
+function CountryCard({country}) {
     return (
-        <Link to={`/${name}`} className="country-card">
+        <Link to={`/${country.name.common}`} className="country-card" state={country}>
             <div className="image">
-                <img src={flag} alt="" />
+                <img src={country.flags.png} alt="" />
             </div>
 
             <div className="content">
-                <h2 className='card-title dotDotDot'>{name}</h2>
-                <p className='population'><b>Population:</b> &nbsp;{population.toLocaleString('en-IN')}</p>
-                <p className='region'><b>Region:</b> &nbsp;{region ?? 'No Region'}</p>
-                <p className='capital dotDotDot'><b>Capital:</b> &nbsp;{capital.join(', ')}</p>
+                <h2 className='card-title dotDotDot'>{country.name.common}</h2>
+                <p className='population'><b>Population:</b> &nbsp;{country.population.toLocaleString('en-IN')}</p>
+                <p className='region'><b>Region:</b> &nbsp;{country.region ?? 'No Region'}</p>
+                <p className='capital dotDotDot'><b>Capital:</b> &nbsp;{country.capital.join(', ')}</p>
             </div>
         </Link>
     )

@@ -28,7 +28,11 @@ header {
     margin: 0 auto;
 }
 
-.header .title {
+.header .logo-title {
+    margin-left: 43px;
+}
+
+.header .logo-title .title {
     font-size: 24px;
     font-weight: 800;
 }
@@ -38,8 +42,14 @@ header {
     font-weight: 600;
 }
 
+.svg {
+    position: absolute;
+    top: -14px;
+    left: -14px;
+}
+
 main {
-    height: calc(100vh - 54.76px);
+    min-height: calc(100vh - 54.76px);
     padding-inline: 20px;
     margin-top: 2px;
     background-color: #FAFAFA;
@@ -87,6 +97,7 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 40px;
+    padding-bottom: 40px;
 }
 
 .country-card {
@@ -159,6 +170,7 @@ section {
     display: flex;
     gap: 80px;
     justify-content: space-between;
+    padding-bottom: 40px;
 }
 
 .country-details .child {

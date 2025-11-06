@@ -1,32 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../components/Button'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import CountryDetailShimmer from '../components/CountryDetailShimmer.jsx'
 
 function Country() {
   const countryName = useParams().Country
+  const { state } = useLocation()
+  // console.log(state)
 
   const [country, setCountry] = useState([])
   const [borderCountries, setBorderCountries] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,flags,capital,cca3,population,region,subregion,maps,tld,currencies,languages,borders`)
-      .then(res => res.json())
-      .then(([data]) => {
-        setCountry(data)
-        setLoading(false)
+    if (state) {
+      setCountry(state)
+      setLoading(false)
+      // console.log(state)
+      fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=maps,borders`)
+        .then(res => res.json())
+        .then(([data]) => {
+          // console.log(data.borders)
+          if (data.borders && data.borders.length > 0) {
+            Promise.all(
+              data.borders.map(border => 
+                fetch(`https://restcountries.com/v3.1/alpha/${border}?fields=name,cca3`)
+                  .then(res => res.json())
+              )
+            ).then(borderData => setBorderCountries(borderData))
+          }
+        })
+    }
+    else {
+      fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,flags,capital,cca3,population,region,subregion,maps,tld,currencies,languages,borders`)
+        .then(res => res.json())
+        .then(([data]) => {
+          setCountry(data)
+          setLoading(false)
 
-        // Fetch border countries data
-        if (data.borders && data.borders.length > 0) {
-          Promise.all(
-            data.borders.map(border =>
-              fetch(`https://restcountries.com/v3.1/alpha/${border}?fields=name,flags,cca3`)
-                .then(res => res.json())
-            )
-          ).then(borderData => setBorderCountries(borderData))
-        }
-      })
+          // Fetch border countries data
+          if (data.borders && data.borders.length > 0) {
+            Promise.all(
+              data.borders.map(border =>
+                fetch(`https://restcountries.com/v3.1/alpha/${border}?fields=name,cca3`)
+                  .then(res => res.json())
+              )
+            ).then(borderData => setBorderCountries(borderData))
+          }
+        })
+    }
   }, [countryName])
 
   return (

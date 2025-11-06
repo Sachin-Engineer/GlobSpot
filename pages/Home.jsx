@@ -11,14 +11,14 @@ function Home() {
 
     useEffect(() => {
         if (region === '') {
-            fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region')
+            fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region,subregion,tld,currencies,languages')
                 .then(res => res.json())
                 .then(data => {
                     setCountries(data)
                     setLoading(false)
                 })
         } else {
-            fetch(`https://restcountries.com/v3.1/region/${region}?fields=name,flags,capital,cca3,population,region`)
+            fetch(`https://restcountries.com/v3.1/region/${region}?fields=name,flags,capital,cca3,population,region,subregion,tld,currencies,languages`)
                 .then(res => res.json())
                 .then(data => {
                     setCountries(data)
@@ -63,11 +63,12 @@ function Home() {
                                 return (
                                     <CountryCard
                                         key={country.cca3}
-                                        flag={country.flags.png}
-                                        name={country.name.common}
-                                        population={country.population}
-                                        region={country.region}
-                                        capital={country.capital}
+                                        // flag={country.flags.png}
+                                        // name={country.name.common}
+                                        // population={country.population}
+                                        // region={country.region}
+                                        // capital={country.capital}
+                                        country={country}
                                     />
                                 )
                             })
