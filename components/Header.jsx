@@ -1,7 +1,13 @@
-function Header() {
+import { useState } from "react"
+import { MdDarkMode, MdLightMode } from "react-icons/md";
+
+function Header({ theme }) {
+    const [isDarkMode, setDarkMode] = theme;
+    // console.log(isDarkMode)
+
     return (
-        <header>
-            <div className="header" style={{ position: 'relative'}}>
+        <header className={isDarkMode ? 'darkmode' : ''}>
+            <div className="header" style={{ position: 'relative' }}>
                 <div className="logo-title">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +104,11 @@ function Header() {
 
                     <p className="title">GlobSpot</p>
                 </div>
-                <p className="mode"><i className="fa-solid fa-moon"></i><span>Dark Mode</span></p>
+                <p className="mode" onClick={() => {
+                    localStorage.setItem('dark-mode', !isDarkMode)
+                    setDarkMode(!isDarkMode)
+                }}
+                >{isDarkMode ? <MdLightMode /> : <MdDarkMode />}<span>{isDarkMode ? 'Light' : 'Dark'} Mode</span></p>
             </div>
         </header>
     )

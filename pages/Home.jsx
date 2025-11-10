@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CountryCard from '../components/CountryCard'
 import CountryCardShimmer from '../components/CountryCardShimmer'
+import { useOutletContext } from 'react-router-dom'
 // import countries from './data.js'
 
 function Home() {
@@ -8,6 +9,8 @@ function Home() {
     const [countries, setCountries] = useState([])
     const [region, setRegion] = useState('')
     const [isLoading, setLoading] = useState(true)
+    const [isDarkMode] = useOutletContext()
+    // console.log(isDarkMode)
 
     useEffect(() => {
         if (region === '') {
@@ -31,7 +34,7 @@ function Home() {
         <>
             {/* <Header /> */}
 
-            <main>
+            <main className={isDarkMode ? 'darkmode' : ''}>
                 <div className="search-container">
                     <div className="search-box">
                         <i className="fa-solid fa-magnifying-glass"></i>
