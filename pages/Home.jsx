@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CountryCard from '../components/CountryCard'
 import CountryCardShimmer from '../components/CountryCardShimmer'
-import ThemeContext from '../contexts/ThemeContext'
+import { ThemeContext } from '../contexts/ThemeContext'
 // import countries from './data.js'
 
 function Home() {
@@ -56,7 +56,7 @@ function Home() {
                 <section className="countries-container">
                     {
                         isLoading ? (
-                            Array.from({length: 20}).map((_, i) => {
+                            Array.from({ length: 20 }).map((_, i) => {
                                 return <CountryCardShimmer key={i} />
                             })
                         ) : (

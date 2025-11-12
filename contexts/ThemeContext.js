@@ -1,5 +1,13 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-const ThemeContext = createContext('sachin')
+export const ThemeContext = createContext()
 
-export default ThemeContext;
+export function ThemeProvider({ children }) {
+    const [isDarkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('dark-mode')));
+
+    return (
+        <ThemeContext.Provider value={[isDarkMode, setDarkMode]}>
+            {children}
+        </ThemeContext.Provider>
+    )
+}

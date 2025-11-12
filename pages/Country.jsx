@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Button from '../components/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import CountryDetailShimmer from '../components/CountryDetailShimmer.jsx'
-import ThemeContext from '../contexts/ThemeContext.js'
+import { ThemeContext } from '../contexts/ThemeContext.js'
 
 function Country() {
   const countryName = useParams().Country
@@ -24,7 +24,7 @@ function Country() {
           // console.log(data.borders)
           if (data.borders && data.borders.length > 0) {
             Promise.all(
-              data.borders.map(border => 
+              data.borders.map(border =>
                 fetch(`https://restcountries.com/v3.1/alpha/${border}?fields=name,cca3`)
                   .then(res => res.json())
               )
