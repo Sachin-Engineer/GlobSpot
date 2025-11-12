@@ -1,9 +1,8 @@
-import { useContext } from "react"
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 
 function Header() {
-    const [isDarkMode, setDarkMode] = useContext(ThemeContext)
+    const [isDarkMode, setDarkMode] = useTheme()
     // console.log(isDarkMode)
 
     return (

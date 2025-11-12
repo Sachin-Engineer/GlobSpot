@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import CountryCard from '../components/CountryCard'
 import CountryCardShimmer from '../components/CountryCardShimmer'
 import { ThemeContext } from '../contexts/ThemeContext'
+import { useTheme } from '../hooks/useTheme'
 // import countries from './data.js'
 
 function Home() {
@@ -9,7 +10,7 @@ function Home() {
     const [countries, setCountries] = useState([])
     const [region, setRegion] = useState('')
     const [isLoading, setLoading] = useState(true)
-    const [isDarkMode] = useContext(ThemeContext)
+    const [isDarkMode] = useTheme()
     // console.log(isDarkMode)
 
     useEffect(() => {

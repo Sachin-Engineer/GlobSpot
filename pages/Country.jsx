@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../components/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import CountryDetailShimmer from '../components/CountryDetailShimmer.jsx'
-import { ThemeContext } from '../contexts/ThemeContext.js'
+import { useTheme } from '../hooks/useTheme.js'
 
 function Country() {
   const countryName = useParams().Country
@@ -11,7 +11,7 @@ function Country() {
   const [country, setCountry] = useState([])
   const [borderCountries, setBorderCountries] = useState([])
   const [isLoading, setLoading] = useState(true)
-  const [isDarkMode] = useContext(ThemeContext)
+  const [isDarkMode] = useTheme()
 
   useEffect(() => {
     if (state) {
