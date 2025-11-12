@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CountryCard from '../components/CountryCard'
 import CountryCardShimmer from '../components/CountryCardShimmer'
-import { useOutletContext } from 'react-router-dom'
+import ThemeContext from '../contexts/ThemeContext'
 // import countries from './data.js'
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
     const [countries, setCountries] = useState([])
     const [region, setRegion] = useState('')
     const [isLoading, setLoading] = useState(true)
-    const [isDarkMode] = useOutletContext()
+    const [isDarkMode] = useContext(ThemeContext)
     // console.log(isDarkMode)
 
     useEffect(() => {
