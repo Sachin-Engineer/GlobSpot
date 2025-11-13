@@ -1,35 +1,24 @@
 import { useEffect, useState } from 'react'
 import CountryCard from '../components/CountryCard'
 import CountryCardShimmer from '../components/CountryCardShimmer'
-import { ThemeContext } from '../contexts/ThemeContext'
 import { useTheme } from '../hooks/useTheme'
 // import countries from './data.js'
 
 function Home() {
     const [query, setQuery] = useState('')
     const [countries, setCountries] = useState([])
-    const [region, setRegion] = useState('')
     const [isLoading, setLoading] = useState(true)
     const [isDarkMode] = useTheme()
     // console.log(isDarkMode)
 
     useEffect(() => {
-        if (region === '') {
-            fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region,subregion,tld,currencies,languages')
-                .then(res => res.json())
-                .then(data => {
-                    setCountries(data)
-                    setLoading(false)
-                })
-        } else {
-            fetch(`https://restcountries.com/v3.1/region/${region}?fields=name,flags,capital,cca3,population,region,subregion,tld,currencies,languages`)
-                .then(res => res.json())
-                .then(data => {
-                    setCountries(data)
-                    setLoading(false)
-                })
-        }
-    }, [region])
+        fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,cca3,population,region,subregion,tld,currencies,languages')
+            .then(res => res.json())
+            .then(data => {
+                setCountries(data)
+                setLoading(false)
+            })
+    }, [])
 
     return (
         <>
@@ -43,7 +32,7 @@ function Home() {
                     </div>
 
                     <div className="region-box">
-                        <select onChange={(e) => setRegion(e.target.value)} name="region" id="region">
+                        <select onChange={(e) => setQuery(e.target.value)} name="region" id="region">
                             <option value="" hidden>Filter by Region</option>
                             <option value="Africa">Africa</option>
                             <option value="Americas">Americas</option>
@@ -62,7 +51,7 @@ function Home() {
                             })
                         ) : (
                             countries.filter((country) => {
-                                return country.name.common.toLowerCase().includes(query.toLowerCase())
+                                return country.name.common.toLowerCase().includes(query.toLowerCase()) || country.region.toLowerCase().includes(query.toLowerCase())
                             }).map((country) => {
                                 return (
                                     <CountryCard
