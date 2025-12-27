@@ -94,7 +94,7 @@ header {
 main {
     position: relative;
     z-index: 5;
-    min-height: calc(100vh - 54.76px);
+    min-height: calc(100vh - 52.67px);
     padding-inline: 20px;
     /* margin-top: 2px; */
     background-color: var(--primary-bg-color);
